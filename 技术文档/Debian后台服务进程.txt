@@ -1,0 +1,17 @@
+对于一些脚本需要在后台长期运行，并在进程退出后能够自动重启
+1，安装supervisor
+apt-get install supervisor
+2，修改配置文件
+vim /etc/supervisor/conf.d/app.conf
+[program:app]
+command=/usr/bin/python2.7 /home/wwwroot/default/lib/python/messageHandle.py
+autostart=true
+autorestart=true
+directory=/home/wwwroot/default/lib/python
+user=root
+3,启动
+supervisord -c /etc/supervisor/supervisord.conf
+4，Reload
+supervisorctl reload
+5，开启系统进程
+supervisorctl start app
